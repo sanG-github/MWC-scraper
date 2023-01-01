@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "chromedriver": "^108.0.0",
+    "geckodriver": "^3.2.0",
+    "prompt-sync": "^4.2.0",
+    "selenium-webdriver": "^4.7.1"
+  },
+  "name": "selenium-be",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
