@@ -75,20 +75,24 @@ app.get('/', async function(req, res) {
     let contents = [];
     const inputs = parseInputs(req.query.codes);
 
-    const options = new Chrome.Options();
-    driver = await new Builder()
-        .setChromeOptions(options.addArguments('headless', 'disable-dev-shm-usage', 'no-sandbox'))
-        .forBrowser('chrome')
-        .build();
+    try {
+        const options = new Chrome.Options();
+        driver = await new Builder()
+            .setChromeOptions(options.addArguments('headless', 'disable-dev-shm-usage', 'no-sandbox'))
+            .forBrowser('chrome')
+            .build();
 
-    for (let input of inputs) {
-        console.log(`Đang lấy thông tin sản phẩm ${input}`)
-        contents.push(await getInfo(input, driver));
+        for (let input of inputs) {
+            console.log(`Đang lấy thông tin sản phẩm ${input}`)
+            contents.push(await getInfo(input, driver));
+        }
+
+        // Log results
+        res.setHeader('Content-type', 'text/html');
+        res.send(contents.join(LINE_SEPARATOR));
+    } catch {
+        res.send("Lỗi khi lấy thông tin sản phẩm")
     }
-
-    // Log results
-    res.setHeader('Content-type', 'text/html');
-    res.send(contents.join(LINE_SEPARATOR));
 
     driver.quit();
 });
