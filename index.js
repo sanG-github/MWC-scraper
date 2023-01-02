@@ -63,7 +63,7 @@ function parseInputs(inputs) {
     if (!inputs) return [];
 
     // Split and trim input
-    inputs = inputs.split(",").map((item) => item.trim());
+    inputs = inputs.split(/[,.]/).map((item) => item.trim()).filter(n => n);
 
     // Unique input
     inputs = [...new Set(inputs)];
