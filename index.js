@@ -15,8 +15,6 @@ const TEXT_OPEN_TAG = '<span>';
 const TEXT_CLOSE_TAG = '</span>';
 const LINE_SEPARATOR = `${LINE_BREAK}--------------------------------${LINE_BREAK}`;
 
-let contents = [];
-
 async function getInfo(input, driver) {
     let content = '';
     let colors = [];
@@ -42,11 +40,12 @@ async function getInfo(input, driver) {
     const sizeElements = await driver.findElements(By.css('.product-option #sizeOptions a.product-option-item'))
 
     for (let size of sizeElements) {
-        await size.click();
+        // await size.click();
 
-        const inStock = await driver.findElement(By.css('.product-cart-actions #btnStatus')).getCssValue('display') === 'none';
+        // const inStock = await driver.findElement(By.css('.product-cart-actions #btnStatus')).getCssValue('display') === 'none';
 
-        if (inStock) sizes.push(await size.getText());
+        // if (inStock) 
+        sizes.push(await size.getText());
     }
 
     content += LINE_BREAK;
@@ -73,6 +72,7 @@ function parseInputs(inputs) {
 }
 
 app.get('/', async function(req, res) {
+    let contents = [];
     const inputs = parseInputs(req.query.codes);
 
     const options = new Chrome.Options();
